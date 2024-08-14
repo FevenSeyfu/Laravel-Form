@@ -21,7 +21,7 @@
         <h1 class="">Product List</h1>
         <div class="container border-bottom border-secondary py-3">
             <h2>Add Product</h2>
-            <form action="/submit" method="POST" class="d-flex flex-column mb-3">
+            <form action="{{ route('products.store') }}" method="POST" class="d-flex flex-column mb-3">
                 @csrf
                 <div class="form-group mb-3">
                     <label for="productName" class="form-label">Product Name</label>
@@ -35,41 +35,38 @@
                     <label for="price" class="form-label">Price per Item</label>
                     <input type="number" class="form-control" id="price" name="price" required>
                 </div>
-                <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                <button type="submit" class="btn btn-primary mt-3 w-auto mx-auto">Submit</button>
             </form>
         </div>
-        <div class="container">
-            <h3 class="mt-5">Products</h3>
+
+        <div class="container mt-5">
+            <h2>Product List</h2>
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>Product Name</th>
                         <th>Quantity in Stock</th>
                         <th>Price per Item</th>
-                        <th>Date Submitted</th>
+                        <th>Datetime Submitted</th>
                         <th>Total Value</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
-                {{-- <tbody>
+                <tbody>
                     @php $sumTotalValue = 0; @endphp
-                    @foreach ($products as $product)
+                    @foreach($products as $product)
                         @php $sumTotalValue += $product['totalValue']; @endphp
                         <tr>
                             <form action="/edit/{{ $product['id'] }}" method="POST">
                                 @csrf
-                                <td><input type="text" name="productName" value="{{ $product['productName'] }}"
-                                        class="form-control" readonly></td>
-                                <td><input type="number" name="quantity" value="{{ $product['quantity'] }}"
-                                        class="form-control" readonly></td>
-                                <td><input type="number" name="price" value="{{ $product['price'] }}"
-                                        class="form-control" readonly></td>
+                                <td><input type="text" name="productName" value="{{ $product['productName'] }}" class="form-control" readonly></td>
+                                <td><input type="number" name="quantity" value="{{ $product['quantity'] }}" class="form-control" readonly></td>
+                                <td><input type="number" name="price" value="{{ $product['price'] }}" class="form-control" readonly></td>
                                 <td>{{ $product['dateTimeSubmitted'] }}</td>
                                 <td>{{ $product['totalValue'] }}</td>
                                 <td>
                                     <button type="button" class="btn btn-warning btn-edit">Edit</button>
-                                    <button type="submit" class="btn btn-success btn-update"
-                                        style="display: none;">Update</button>
+                                    <button type="submit" class="btn btn-success btn-update" style="display: none;">Update</button>
                                 </td>
                             </form>
                         </tr>
@@ -78,8 +75,7 @@
                         <td colspan="4"><strong>Total</strong></td>
                         <td colspan="2"><strong>{{ $sumTotalValue }}</strong></td>
                     </tr>
-
-                </tbody> --}}
+                    </tbody>
             </table>
         </div>
     </main>
